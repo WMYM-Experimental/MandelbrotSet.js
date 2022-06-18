@@ -1,11 +1,11 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-//canvas.width = window.innerWidth;
-//canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+canvas.height = window.innerWidth;
 
 ctx.translate(
-    canvas.width / 2 - canvas.width / 2,
+    canvas.width / 2 - canvas.width / 2 + 100,
     canvas.height / 2 - canvas.height / 2
 );
 
@@ -38,7 +38,7 @@ class Complex {
     }
     belongsToMandelbrotSet() {
         let z = new Complex(0, 0);
-        for (let i = 0; i < 200; i++) {
+        for (let i = 0; i < 100; i++) {
             // z = z(n)^2 + c -> this is c
             z = z.mul(z).add(this); //this is the current complex number
             if (z.mag() > 2) {
@@ -47,14 +47,9 @@ class Complex {
         }
         return true;
     }
-    draw() {
-        ctx.beginPath();
-        ctx.arc(this.a, this.b, 1, 0, 2 * Math.PI);
-        ctx.fill();
-    }
 }
 
-const init = () => {
+const draw = () => {
     for (let i = 0; i < canvas.width; i++) {
         for (let j = 0; j < canvas.height; j++) {
             const c = new Complex(
@@ -69,4 +64,4 @@ const init = () => {
     }
 };
 
-init();
+draw();
